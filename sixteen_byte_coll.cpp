@@ -145,7 +145,7 @@ int main(int argc, char ** argv) {
 		sha2.update(fake_confession[i]);
 		sha2.update("\n");
 	}
-	for (k = 0; k < 64; k++) { // 64 is wayyy more than enough
+	for (k = 0; k < 4; k++) { // you probably don't need to increase k even for larger hash collisions
 		cout << k << "\n";
 		uint64_t index1 = 0;
 		SHA256 copy = SHA256(sha1);
@@ -161,12 +161,17 @@ int main(int argc, char ** argv) {
 		collide2->reset();
 		printf("Sizes: %u %u\n", real_hashes, fake_hashes);
 	}
+
+	// ceebs writing code to convert the numbers into actual confessions but basically if you subtract
+	// 1743392200 from each number, after the first two lines of the real confession and the first 10 lines of the
+	// fake confession, its ternary representation will tell you what choices to make when selecting each line
+	// (i.e. if 0, append "\n", if 1 append " \n" and if 2 append "\t\n")
 	for (uint64_t t = 1743392200; t < 4294967296UL; t++) {
 		if (segtree1[t]) {
 			cout << t << "\n";
 		}
 	}
-	cout << "now the second ones\n";
+	cout << "now the fake confession id number thing\n";
 	for (uint64_t t = 1743392200; t < 4294967296UL; t++) {
 		if (segtree2[t]) {
 			cout << t << "\n";
